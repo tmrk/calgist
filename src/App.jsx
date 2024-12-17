@@ -7,8 +7,9 @@ function App() {
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [icsBlob, setIcsBlob] = useState(null);
-  const [sourceUrl, setSourceUrl] = useState('');
-  const [isLoading, setIsLoading] = useState(true); // For loading indicator
+  const [sourceUrl, setSourceUrl] = useState(''); // Gist URL
+  const [filename, setFilename] = useState('event.ics'); // Default filename
+  const [isLoading, setIsLoading] = useState(true); // Loading indicator
 
   useEffect(() => {
     // Parse URL search params
@@ -79,6 +80,9 @@ function App() {
         // Set the source URL for the Gist
         setSourceUrl(data.html_url);
 
+        // Set the filename for download
+        setFilename(selectedFile.filename);
+
         // Fetch the .ics file content
         fetch(selectedFile.raw_url)
           .then(res => {
@@ -120,11 +124,11 @@ function App() {
   }, []);
 
   const handleDownload = () => {
-    if (icsBlob) {
+    if (icsBlob && filename) {
       const url = window.URL.createObjectURL(new Blob([icsBlob], { type: 'text/calendar' }));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'event.ics'); // Customize filename if needed
+      link.setAttribute('download', filename); // Use dynamic filename
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
