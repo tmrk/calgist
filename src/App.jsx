@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './styles/main.scss';
+import useFacebookBrowser from './useFacebookBrowser';
 
 function App() {
+  const isFacebook = useFacebookBrowser();
   const [title, setTitle] = useState('CalGist');
-  const [buttonText, setButtonText] = useState('Download');
+  const [buttonText, setButtonText] = useState('Add to Calendar');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const [icsBlob, setIcsBlob] = useState(null);
@@ -12,6 +14,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(true); // Loading indicator
 
   useEffect(() => {
+    if (isFacebook) {
+      return;
+    }
+
     // Parse URL search params
     const params = new URLSearchParams(window.location.search);
     const titleParam = params.get('title');
@@ -95,13 +101,8 @@ function App() {
             setIcsBlob(blob);
             setIsLoading(false);
             // Determine button text
-            if (buttonParam) {
-              setButtonText(buttonParam);
-            } else {
-              setButtonText("Add to Calendar");
-            }
+            setButtonText(buttonParam || "Add to Calendar");
 
-            // Determine description
             if (descrParam === '0') {
               setDescription('');
             } else if (descrParam) {
@@ -121,14 +122,14 @@ function App() {
         setError('An error occurred while loading the Gist. ' + err.message);
         setIsLoading(false);
       });
-  }, []);
+    }, []);
 
   const handleDownload = () => {
     if (icsBlob && filename) {
       const url = window.URL.createObjectURL(new Blob([icsBlob], { type: 'text/calendar' }));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', filename); // Use dynamic filename
+      link.setAttribute('download', filename);
       document.body.appendChild(link);
       link.click();
       link.parentNode.removeChild(link);
@@ -138,7 +139,27 @@ function App() {
   return (
     <div className="container">
       <h1>{title}</h1>
-      {isLoading ? (
+      {isFacebook ? (
+        <div className="facebook-warning">
+          <p>
+            You have opened this link in the Facebook app. To download the calendar event correctly, please open the link in your mobile browser.
+          </p>
+          <ol>
+            <li>Tap the three dots in the top-right corner.</li>
+            <li>Select "Open in Browser" or "Open in Safari"/"Open in Chrome".</li>
+            <li>Return to this page in your browser to download the `.ics` file.</li>
+          </ol>
+          <button
+            onClick={() => {
+              const url = window.location.href;
+              window.open(url, '_blank');
+            }}
+            className="redirect-button"
+          >
+            Open in Browser
+          </button>
+        </div>
+      ) : isLoading ? (
         <div className="loading">Loading...</div>
       ) : (
         <>
@@ -154,12 +175,13 @@ function App() {
           )}
           {sourceUrl && (
             <div className="source-box">
-              <strong>Source:</strong> <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{sourceUrl}</a>
+              <strong>Source:</strong>{' '}
+              <a href={sourceUrl} target="_blank" rel="noopener noreferrer">
+                {sourceUrl}
+              </a>
             </div>
           )}
-          {error && (
-            <div className="error">{error}</div>
-          )}
+          {error && <div className="error">{error}</div>}
         </>
       )}
     </div>

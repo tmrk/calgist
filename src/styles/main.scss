@@ -113,11 +113,72 @@ button:hover,
 }
 
 .source-box a {
-  color: #ccc; /* Teal link color */
+  color: #ccc;
   text-decoration: none;
 }
 
 .source-box a:hover {
   text-decoration: underline;
   color: #aaa;
+}
+
+/* Facebook Warning Styles */
+.facebook-warning {
+  background: #fff3cd;
+  padding: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.facebook-warning p {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.facebook-warning ol {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.redirect-button {
+  background: #d1ecf1;
+  color: #0c5460;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+.redirect-button:hover {
+  background: #bee5eb;
+}
+
+.loading {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-top: 20px;
+}
+
+.browser-support {
+  background: #d4edda;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.fallback-message {
+  background: #f8d7da;
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
