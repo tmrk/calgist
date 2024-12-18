@@ -103,10 +103,10 @@ button:hover,
 
 .source-box {
   width: calc(100% - 30px);
-  background: #f2f2f2;
   margin-bottom: 20px;
   padding: 10px 15px;
   border-radius: 4px;
+  background: #f2f2f2;
   font-size: 0.8rem;
   color: #ccc;
   word-wrap: break-word;
@@ -124,12 +124,12 @@ button:hover,
 
 /* Facebook Warning Styles */
 .facebook-warning {
-  background: #fff3cd;
-  padding: 20px;
+  width: calc(100% - 30px);
+  margin-bottom: 20px;
+  padding: 10px 15px;
   border-radius: 4px;
-  margin-top: 20px;
+  background: #fff3cd;
   color: #856404;
-  border: 1px solid #ffeeba;
 }
 
 .facebook-warning p {

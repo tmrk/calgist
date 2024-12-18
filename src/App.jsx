@@ -146,18 +146,8 @@ function App() {
           </p>
           <ol>
             <li>Tap the three dots in the top-right corner.</li>
-            <li>Select "Open in Browser" or "Open in Safari"/"Open in Chrome".</li>
-            <li>Return to this page in your browser to download the `.ics` file.</li>
+            <li>Select "Open in Browser" or "Open in Safari" / "Open in Chrome".</li>
           </ol>
-          <button
-            onClick={() => {
-              const url = window.location.href;
-              window.open(url, '_blank');
-            }}
-            className="redirect-button"
-          >
-            Open in Browser
-          </button>
         </div>
       ) : isLoading ? (
         <div className="loading">Loading...</div>
