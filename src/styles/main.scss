@@ -25,25 +25,31 @@
   }
   
   .container {
-    width: calc(100% - 40px);
-    min-height: calc(50% - 40px);
+    width: calc(100% - 70px);
+    min-height: calc(50% - 70px);
     max-width: 600px;
     padding: 0 20px;
     margin: 20px auto;
+    border-radius: 5px;
+    box-shadow: rgba(100,100,100,0.1) 0 0 15px;
     background-color: #ffffffdd;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     row-gap: 15px;
+    word-wrap: break-word;
+    line-break: auto;
+    hyphens: auto;
   }
   
   h1 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-bottom: 20px;
     color: var(--text-color);
-    line-height: 1.4em;
+    line-height: 1.5em;
     text-align: center;
+    word-wrap: break-word;
   }
   
   .description {
@@ -60,8 +66,8 @@
   
   button,
   .link-button {
-    width: calc(100% - 40px);
-    display: inline-block;
+    width: 100%;
+    display: block;
     text-decoration: none;
     padding: 30px 20px;
     background: var(--button-bg);
@@ -91,21 +97,22 @@
   }
   
   .source-box {
-    background: #e0f7fa; /* Light cyan background */
+    width: calc(100% - 30px);
+    background: #f2f2f2;
     padding: 10px 15px;
     border-radius: 4px;
-    margin-top: 20px;
-    font-size: 0.9rem;
-    color: #006064; /* Dark cyan text */
-    border: 1px solid #b2ebf2; /* Light border */
+    font-size: 0.8rem;
+    color: #ccc;
+    word-wrap: break-word;
   }
   
   .source-box a {
-    color: #00796b; /* Teal link color */
+    color: #ccc; /* Teal link color */
     text-decoration: none;
   }
   
   .source-box a:hover {
     text-decoration: underline;
+    color: #aaa;
   }
   
